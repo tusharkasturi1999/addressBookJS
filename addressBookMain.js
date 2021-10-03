@@ -2,7 +2,8 @@ const prompt = require("prompt-sync")();
 const validation = require("./validation.js");
 
 let contact;
-let addContact = () => {
+let addressBookArray = [];
+const addContact = () => {
   let firstName = prompt("Enter the first name: ");
   let lastName = prompt("Enter the last name: ");
   let address = prompt("Enter the Address: ");
@@ -11,6 +12,8 @@ let addContact = () => {
   let zip = prompt("Enter the ZIP: ");
   let phone = prompt("Enter the Phone number: ");
   let email = prompt("Enter the email id: ");
+
+  //validation for the user inputs
   try {
     validation.firstNameValidation(firstName);
     validation.lastNameValidation(lastName);
@@ -24,7 +27,6 @@ let addContact = () => {
     console.error(error);
     addContact();
   }
-
   contact = {
     firstName: firstName,
     lastName: lastName,
@@ -35,7 +37,29 @@ let addContact = () => {
     phone: phone,
     email: email,
   };
+  addressBookArray.push(contact);
   console.log("Contacts inserted successfully");
   console.log(contact);
 };
-addContact();
+
+//displays the addressBook Contacts
+let displayAddressBook = () => {
+  console.log(addressBookArray);
+};
+
+let flag = true;
+while (flag) {
+  console.log("1.Add Contact\n2.Display AddressBook");
+  let choice = prompt("Enter your choice: ");
+  switch (Number(choice)) {
+    case 1:
+      addContact(); //calling the addContact function to insert details into contact
+      break;
+    case 2:
+      displayAddressBook(); // displays the addressBook
+      break;
+    default:
+      flag = false; // break the while loop
+      break;
+  }
+}
