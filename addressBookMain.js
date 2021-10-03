@@ -155,8 +155,23 @@ let editContact = (personName) => {
     console.log("Name you entered is not present in addressBook");
 };
 
+//delete contact from addressBook
+let deleteContact = (personName) => {
+  let flag = true;
+  for (let i = 0; i < addressBookArray.length; i++) {
+    if (addressBookArray[i].firstName == personName) {
+      flag = false;
+      addressBookArray.splice(i, 1);
+      console.log("Deleted Successfully!!");
+      break;
+    }
+  }
+  if (flag) console.log("Name you entered is not present in addressBook");
+};
+
 //main
 let flag = true;
+let personName;
 while (flag) {
   console.log("1.Add Contact\n2.Display AddressBook\n3.Edit Contact");
   let choice = prompt("Enter your choice: ");
@@ -168,10 +183,14 @@ while (flag) {
       displayAddressBook(); // displays the addressBook
       break;
     case 3:
-      let personName = prompt(
+      personName = prompt(
         "Enter the name whose contact detail needs to be edited :"
       );
       editContact(personName);
+      break;
+    case 4:
+      personName = prompt("Enter the name whose contact you need to delete :");
+      deleteContact(personName);
       break;
     default:
       console.log("Wrong choice");
