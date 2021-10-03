@@ -189,7 +189,9 @@ let sizeAddressBook = () => {
 
 //search based on city and state using filter method
 let searchCityState = (place) => {
-  resultArray = addressBookArray.filter(contact => contact.state == place || contact.city == place);
+  resultArray = addressBookArray.filter(
+    (contact) => contact.state == place || contact.city == place
+  );
   if (resultArray.length == 0) {
     console.log("There are no people in this state or city");
   } else {
@@ -198,12 +200,28 @@ let searchCityState = (place) => {
   }
 };
 
+//sort the array based on name in asscending order
+let sortAddressBook = () => {
+  addressBookArray.sort((a, b) => {
+    let fa = a.firstName.toLowerCase(),
+      fb = b.firstName.toLowerCase();
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  });
+  displayAddressBook();
+};
+
 //main
 let flag = true;
 let personName;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit Contact\n4.Delete Contact\n5.Count of contacts\n6.search by city or state"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit Contact\n4.Delete Contact\n5.Count of contacts\n6.search by city or state\n7.sort by name"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -217,18 +235,21 @@ while (flag) {
       personName = prompt(
         "Enter the name whose contact detail needs to be edited :"
       );
-      editContact(personName);
+      editContact(personName); //edit the contact 
       break;
     case 4:
       personName = prompt("Enter the name whose contact you need to delete :");
-      deleteContact(personName);
+      deleteContact(personName); //delete the contact
       break;
     case 5:
-      sizeAddressBook();
+      sizeAddressBook(); //length of addressBook
       break;
     case 6:
       let place = prompt("Enter the city name or state :");
-      searchCityState(place);
+      searchCityState(place); //serach by city or state
+      break;
+    case 7:
+      sortAddressBook(); //sort the addressbook based on person's name
       break;
     default:
       console.log("Wrong choice");
