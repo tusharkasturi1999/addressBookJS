@@ -5,6 +5,16 @@ let contact;
 let addressBookArray = [];
 const addContact = () => {
   let firstName = prompt("Enter the first name: ");
+  let repeatCheck = addressBookArray.find(function (contact) {
+    if (contact.firstName == firstName) {
+      return true;
+    }
+  });
+  if (repeatCheck) {
+    console.log("Name already exists!!Please choose different name");
+    addContact();
+    return;
+  }
   let lastName = prompt("Enter the last name: ");
   let address = prompt("Enter the Address: ");
   let city = prompt("Enter the city: ");
