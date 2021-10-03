@@ -36,6 +36,7 @@ const addContact = () => {
   } catch (error) {
     console.error(error);
     addContact();
+    return;
   }
   contact = {
     firstName: firstName,
@@ -68,7 +69,7 @@ let editContact = (personName) => {
         console.log(
           "1.FirstName\n2.LastName\n3.Address\n4.City\n5.State\n6.Zip\n7.Mobile no.\n8.Email\n9.Stop"
         );
-        let option = prompt("Enter what you need to edit");
+        let option = prompt("Enter what you need to edit:");
         switch (Number(option)) {
           case 1:
             let firstName = prompt("Enter the first name: ");
@@ -186,17 +187,15 @@ let sizeAddressBook = () => {
   );
 };
 
-//search based on city and state using find and filter method
+//search based on city and state using filter method
 let searchCityState = (place) => {
-  let filteredArray = addressBookArray;
-  filteredArray.filter(function () {
-    addressBookArray.find(function (contact) {
-      if (contact.city == place || contact.state == place) {
-        return true;
-      }
-    });
-  });
-  console.log("Result:" + JSON.stringify(filteredArray));
+  resultArray = addressBookArray.filter(contact => contact.state == place || contact.city == place);
+  if (resultArray.length == 0) {
+    console.log("There are no people in this state or city");
+  } else {
+    console.log("There are " + resultArray.length + " people");
+    console.log("Result:" + JSON.stringify(resultArray));
+  }
 };
 
 //main
