@@ -200,19 +200,68 @@ let searchCityState = (place) => {
   }
 };
 
-//sort the array based on name in asscending order
+//sort the array based on name,city,state,zip in asscending order
 let sortAddressBook = () => {
-  addressBookArray.sort((a, b) => {
-    let fa = a.firstName.toLowerCase(),
-      fb = b.firstName.toLowerCase();
-    if (fa < fb) {
-      return -1;
-    }
-    if (fa > fb) {
-      return 1;
-    }
-    return 0;
-  });
+  console.log("How do you want to sort\n1.Name\n2.City\n3.state\n4.zip");
+  let ch = prompt("Enter you choice:");
+  let first, second;
+  switch (Number(ch)) {
+    case 1:
+      addressBookArray.sort((a, b) => {
+        first = a.firstName.toLowerCase();
+        second = b.firstName.toLowerCase();
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+    case 2:
+      addressBookArray.sort((a, b) => {
+        first = a.city.toLowerCase();
+        second = b.city.toLowerCase();
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+    case 3:
+      addressBookArray.sort((a, b) => {
+        first = a.state.toLowerCase();
+        second = b.state.toLowerCase();
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+    case 4:
+      addressBookArray.sort((a, b) => {
+        first = a.zip.toLowerCase();
+        second = b.zip.toLowerCase();
+        if (first < second) {
+          return -1;
+        }
+        if (first > second) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+    default:
+      console.log("Wrong choice");
+      break;
+  }
   displayAddressBook();
 };
 
@@ -221,7 +270,7 @@ let flag = true;
 let personName;
 while (flag) {
   console.log(
-    "1.Add Contact\n2.Display AddressBook\n3.Edit Contact\n4.Delete Contact\n5.Count of contacts\n6.search by city or state\n7.sort by name"
+    "1.Add Contact\n2.Display AddressBook\n3.Edit Contact\n4.Delete Contact\n5.Count of contacts\n6.search by city or state\n7.sort by name,city,state,zip"
   );
   let choice = prompt("Enter your choice: ");
   switch (Number(choice)) {
@@ -235,7 +284,7 @@ while (flag) {
       personName = prompt(
         "Enter the name whose contact detail needs to be edited :"
       );
-      editContact(personName); //edit the contact 
+      editContact(personName); //edit the contact
       break;
     case 4:
       personName = prompt("Enter the name whose contact you need to delete :");
